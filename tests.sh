@@ -20,50 +20,6 @@ test_output() {
     echo -e "[ ${RED}Fail${NC} ]: Esperaba '$expected' pero se obtuvo '$output' ${RED}✗${NC}"
   fi
 }
-test_output_ml() {
-  output=$($1)
-  expected=$2
-  if [[ "$output" == "$expected" ]]
-  then
-    echo -e "[  ${GREEN}OK${NC}  ]: $1 ${GREEN}✓${NC}"
-    tests_passed=$((tests_passed + 1))
-  else
-    echo -e "[ ${RED}Fail${NC} ]: $1 ${RED}✗${NC}"
-  fi
-}
-contains() {
-  (grep "$1" $2) > /dev/null
-  exit_code=$?
-  if [[ "$exit_code" -eq 0 ]]
-  then
-    echo -e "[  ${GREEN}OK${NC}  ]: $2 contiene $1 ${GREEN}✓${NC}"
-    tests_passed=$((tests_passed + 1))
-  else
-    echo -e "[ ${RED}Fail${NC} ]: $2 no contiene $1 ${RED}✗${NC}"
-  fi
-}
-test_output_spim() {
-  output=$(echo $1 | $2)
-  expected=$3
-  if [[ "$output" == "$expected" ]]
-  then
-    echo -e "[  ${GREEN}OK${NC}  ]: echo $1 | $2 → $3 ${GREEN}✓${NC}"
-    tests_passed=$((tests_passed + 1))
-  else
-    echo -e "[ ${RED}Fail${NC} ]: Esperaba '$expected' pero se obtuvo '$output' ${RED}✗${NC}"
-  fi
-}
-test_output_redirect() {
-  output=$($1 < $2)
-  expected=$3
-  if [[ "$output" == "$expected" ]]
-  then
-    echo -e "[  ${GREEN}OK${NC}  ]: $1 < $2 → $3 ${GREEN}✓${NC}"
-    tests_passed=$((tests_passed + 1))
-  else
-    echo -e "[ ${RED}Fail${NC} ]: Esperaba '$expected' pero se obtuvo '$output' ${RED}✗${NC}"
-  fi
-}
 
 # 1_longwords
 test_output "./1_longwords word" "word"
